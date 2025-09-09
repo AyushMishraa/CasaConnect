@@ -4,7 +4,9 @@ const bodyParser = require('body-parser');
 const connectToDb = require("./config/db");
 const authRoutes = require('./routes/authRoutes');
 const propertyRoutes = require('./routes/propertyRoutes');
+const userRoutes = require('./routes/userRoutes')
 const cookieParser = require("cookie-parser");
+const contactOwner = require('./routes/contactOwner');
 const app = express();
 
 dotenv.config();
@@ -16,10 +18,11 @@ app.use(cookieParser());
 app.use(express.json()); 
 app.use(bodyParser.urlencoded({extended:true})); // to parse the form data
 
-// Routes (we will add later)
-app.use("/api/auth", authRoutes );
+
+app.use("/api/auth", authRoutes);
 app.use('/api/properties', propertyRoutes);
-// app.use("/api/users", require("./routes/userRoutes"));
+app.use('/api/users', userRoutes);
+app.use('/api/property', contactOwner);
 // app.use("/api/inquiries", require("./routes/inquiryRoutes"));
 
 const port = process.env.PORT;

@@ -7,7 +7,7 @@ dotenv.config();
 const verifyToken = (req, res, next) => {
     const token = req.cookies.token;
     if (!token) {
-        res.status(401).json({message: "Access Denied", error: error.message});
+        res.status(401).json({message: "Access Denied"});
     }
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);

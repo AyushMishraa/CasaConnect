@@ -53,7 +53,7 @@ async function createProperty(req, res) {
 async function updateProperty(req, res) {
     try {
         const property = await Property.findOneAndUpdate(
-            {_id: req.params.id, owner: req.user.id},
+            {_id: req.params.id, owner: req.user._id},
             req.body,
             { new: true}
         );

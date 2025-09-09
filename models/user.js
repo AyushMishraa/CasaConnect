@@ -24,6 +24,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ['tenant','owner','admin'],
         default: 'tenant'
+    },
+    phone: {
+        type: String,
+        default: ""
+    },
+    address: {
+        type: String,
+        default: ""
     }
 },
 {timeseries: true});

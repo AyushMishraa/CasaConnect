@@ -8,7 +8,8 @@ const connectToDb = async () => {
       await mongoose.connect(mongoDbURI, {
           useNewUrlParser: true,
           useUnifiedTopology: true,
-      }).then(console.log("MongoDB Altas is connected successfully"));
+      });
+      console.log("MongoDB Altas is connected successfully");
     } catch (error) {
       console.log("error during connecting to DB:-", error);
       process.exit(1);
