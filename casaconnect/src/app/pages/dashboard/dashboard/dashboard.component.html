@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="filter"></div>
+</div>
+
+<div>
+   <mat-grid-list cols="3" rowHeight="300px">
+      <mat-grid-tile *ngFor = "let property of properties">
+         <app-property-card [property]="property"></app-property-card>
+      </mat-grid-tile>
+   </mat-grid-list>
+
+   <mat-spinner *ngIf="loading">Loading Properties</mat-spinner>
+</div>

@@ -1,1 +1,21 @@
-<p>navbar works!</p>
+<mat-toolbar color="secondary">
+  <span class="logo" routerLink="/">CasaConnect</span>
+  <span class="spacer"></span>
+
+  <a mat-button routerLink="/">Dashboard</a>
+  <a mat-button routerLink="/properties">Properties</a>
+
+  <span class="spacer"></span>
+
+<ng-container *ngIf="user$ | async as user; else guest">
+  <button mat-button routerLink="/profile">{{ user }}</button>
+  <button mat-icon-button (click)="logout()">
+    <mat-icon>logout</mat-icon>
+  </button>
+</ng-container>
+<ng-template #guest>
+  <button mat-button (click)="openLogin()">Login</button>
+  <button mat-raised-button color="accent" (click)="openRegister()">Register</button>
+</ng-template>
+</mat-toolbar>
+

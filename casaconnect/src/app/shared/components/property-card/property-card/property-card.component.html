@@ -1,1 +1,12 @@
-<p>property-card works!</p>
+<mat-card>
+    <img src="" alt="this is property image">
+    <mat-card-content>
+        <h3>{{ property.title }}</h3>
+        <p>{{ property.description }}</p>
+        <p>{{ property.price }}</p>
+        <p>{{ property.address }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button (click)="viewDetails()">View Details</button>
+    </mat-card-actions>
+</mat-card>
