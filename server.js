@@ -20,6 +20,10 @@ app.use(cookieParser());
 app.use(express.json()); 
 app.use(bodyParser.urlencoded({extended:true})); // to parse the form data
 
+app.use({
+    origin: 'http://localhost:4200',
+    credentials: true
+});
 
 app.use("/api/auth", authRoutes);
 app.use('/api/properties', propertyRoutes);
