@@ -25,7 +25,7 @@ export class PropertyService {
   constructor(private http: HttpClient) { }
 
   getAllProperties(): Observable<propertyInterface[]> {
-   return this.http.get<propertyInterface[]>(`${this.api$}/getProperties`);
+   return this.http.get<propertyInterface[]>(`${this.api$}/properties/getAllProperties`);
   }
 
   getPropertyById(id: string): Observable<propertyInterface> {
