@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 const contactOwner = require('./routes/contactOwner');
 const searchProperties = require('./routes/searchPropertiesRoutes');
 const pagingRoute = require('./routes/paginationRoutes');
+const cors = require("cors");
 const app = express();
 
 dotenv.config();
@@ -20,10 +21,11 @@ app.use(cookieParser());
 app.use(express.json()); 
 app.use(bodyParser.urlencoded({extended:true})); // to parse the form data
 
-app.use({
+
+app.use(cors({
     origin: 'http://localhost:4200',
     credentials: true
-});
+}));
 
 app.use("/api/auth", authRoutes);
 app.use('/api/properties', propertyRoutes);
