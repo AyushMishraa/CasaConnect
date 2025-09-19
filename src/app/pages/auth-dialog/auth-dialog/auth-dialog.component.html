@@ -1,0 +1,50 @@
+<h2 mat-dialog-title>
+  {{ authService.isLoggedIn() ? 'Login' : 'Register' }}
+</h2>
+@if (authService.isLoggedIn()) {
+  <!-- Login Tab -->
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="auth-form">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" placeholder="Enter your email" (blur) = updateError()>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password" placeholder="Enter your password" (blur) = updateError()>
+      </mat-form-field>
+    </form>
+}
+@else {
+  <!-- Register Tab -->
+    <form [formGroup]="registerForm" (ngSubmit)="onRegister()" class="auth-form">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" placeholder="Enter your name" (blur) = updateError()>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" placeholder="Enter your email" (blur) = updateError()>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password"  placeholder="Enter your password" (blur) = updateError()>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Phone</mat-label>
+        <input matInput formControlName="phone" type="tel" placeholder="Enter your phone">
+      </mat-form-field>
+    </form>
+}
+
+<mat-dialog-actions>
+  <button mat-button >
+    Switch to {{ authService.isLoggedIn() ? 'Register' : 'Login' }}
+  </button>
+  <button mat-raised-button color="primary">
+    {{ authService.isLoggedIn() ? 'Login' : 'Register' }}
+  </button>
+</mat-dialog-actions>

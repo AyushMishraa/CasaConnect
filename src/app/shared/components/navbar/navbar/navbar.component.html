@@ -2,9 +2,7 @@
   <span class="logo" routerLink="/">CasaConnect</span>
   <span class="spacer"></span>
 
-  <a mat-button routerLink="/">Dashboard</a>
-  <a mat-button routerLink="/properties">Properties</a>
-
+  <a mat-button (click)="onClickDashboard()" >Dashboard</a>
   <span class="spacer"></span>
 
 <ng-container *ngIf="user$ | async as user; else guest">

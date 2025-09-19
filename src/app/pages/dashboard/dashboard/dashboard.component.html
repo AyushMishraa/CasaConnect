@@ -1,10 +1,48 @@
-<div class="container">
-    <div class="filter"></div>
+<div [@slideDown]>
+  <form [formGroup]="filterForm" (ngSubmit)="applyFilters()">
+    <!-- Location -->
+     <div class="search-bar" >   
+      <div class = "filters">
+         <mat-form-field appearance="outline" class="search-field">
+            <mat-label>Location</mat-label>
+            <input matInput formControlName="Location" placeholder="Enter city or area">
+         </mat-form-field>
+
+         <!-- Property Type -->
+         <mat-form-field appearance="outline" class="search-field">
+            <mat-label>Type</mat-label>
+            <mat-select formControlName="type">
+            <mat-option value="">All</mat-option>
+            <mat-option value="flat">Flat</mat-option>
+            <mat-option value="room">Room</mat-option>
+            <mat-option value="house">House</mat-option>
+            <mat-option value="apartment">Apartment</mat-option>
+            </mat-select>
+         </mat-form-field>
+
+         <!-- Max Price -->
+         <mat-form-field appearance="outline" class="search-field">
+            <mat-label>Max Price</mat-label>
+            <input matInput type="number" formControlName="priceRange" placeholder="Enter price">
+         </mat-form-field>
+
+         <!-- Availability -->
+         <mat-slide-toggle formControlName="available">Available</mat-slide-toggle>
+        </div> 
+
+         <!-- Buttons -->
+         <div class="search-buttons">
+            <button mat-raised-button color="primary" type="submit">Search</button>
+            <button mat-button type="button" (click)="resetFilters()">Reset</button>
+         </div>
+    </div>
+  </form>
 </div>
 
-<div>
+
+<div class="property-grid" [@fadeIn]>
    <mat-grid-list cols="3" rowHeight="300px">
-      <mat-grid-tile *ngFor = "let property of properties">
+      <mat-grid-tile *ngFor = "let property of filteredProperties">
          <app-property-card [property]="property"></app-property-card>
       </mat-grid-tile>
    </mat-grid-list>

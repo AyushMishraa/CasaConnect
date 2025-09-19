@@ -3,19 +3,30 @@ import { Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatCard, MatCardContent, MatCardActions } from '@angular/material/card';
 import { propertyInterface } from '../../../../core/services/property.service';
+import { MatButton } from "@angular/material/button";
+import { trigger, transition, style, animate } from '@angular/animations';
+import { MaterialModule } from 'src/app/shared/material/material.module';
 
 @Component({
   selector: 'app-property-card',
   standalone: true,
-  imports: [MatCard, MatCardContent, MatCardActions],
+  imports: [MatCard, MatCardContent, MatCardActions, MatButton, MaterialModule],
   templateUrl: './property-card.component.html',
-  styleUrl: './property-card.component.scss'
+  styleUrl: './property-card.component.scss',
+  animations: [
+    trigger('hoverAnim', [
+      transition(':enter', [
+        style({ transform: 'scale(0.95)', opacity: 0 }),
+        animate('3000ms ease-out', style({ transform: 'scale(1)', opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class PropertyCardComponent {
  @Input() property!: propertyInterface;
  constructor(private router: Router) {}
  
  viewDetails() {
-  this.router.navigate(['/property', this.property.id]);
+  this.router.navigate(['/property', this.property._id]);
  }
 }

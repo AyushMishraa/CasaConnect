@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -30,22 +30,24 @@ export class AuthService {
       this.userSub.next(JSON.parse(stored));
     }
   }
-  registerUser(user: UserInterface) {
+  registerUser(user: UserInterface): Observable<string> {
      this.http.post<{user: UserInterface}>(`${this.api}/user/register`, user, {withCredentials: true})
      .pipe(tap( res => {
         if (res.user) {
           this.setUser(res.user);
         }
       }));
+      return of("User registered successfully");
   }
 
-  loginUser(user: UserInterface) {
+  loginUser(user: UserInterface): Observable<string> {
     this.http.post<{user: UserInterface}>(`${this.api}/user/login`, user, {withCredentials: true})
     .pipe(tap(res => {
       if (res.user) {
         this.setUser(res.user);
       }
     }));
+    return of("User logged in successfully");
   }
 
   logoutUser() {

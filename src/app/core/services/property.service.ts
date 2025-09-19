@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 export interface propertyInterface {
-  id: string,
+  _id: string,
   title: string,
   bedrooms: number,
   bathrooms: number,
@@ -20,28 +20,28 @@ export interface propertyInterface {
   providedIn: 'root'
 })
 export class PropertyService {
-  private api$ = `${environment.api$}/api/properties`;
+  private api$ = `${environment.api$}`;
 
   constructor(private http: HttpClient) { }
 
   getAllProperties(): Observable<propertyInterface[]> {
-   return this.http.get<propertyInterface[]>(`${this.api$}/properties/getAllProperties`);
+   return this.http.get<propertyInterface[]>(`${this.api$}/properties`);
   }
 
   getPropertyById(id: string): Observable<propertyInterface> {
-    return this.http.get<propertyInterface>(`${this.api$}/getProperties/${id}`);
+    return this.http.get<propertyInterface>(`${this.api$}/properties/${id}`);
   }
 
   createProperty(property: propertyInterface): Observable<propertyInterface> {
-    return this.http.post<propertyInterface>(`${this.api$}/createProperty`, property, {withCredentials: true});
+    return this.http.post<propertyInterface>(`${this.api$}/properties/addProperty`, property, {withCredentials: true});
   }
 
   updateProperty(property: propertyInterface) {
-   this.http.put<propertyInterface>(`${this.api$}/updateProperty/${property.id}`, property, {withCredentials: true});
+   this.http.put<propertyInterface>(`${this.api$}/properties/editProperty/${property._id}`, property, {withCredentials: true});
   }
 
   deleteProperty(id: string) {
-    this.http.delete<propertyInterface>(`${this.api$}/deleteProperty/${id}`, {withCredentials: true});
+    this.http.delete<propertyInterface>(`${this.api$}/properties/removeProperty/${id}`, {withCredentials: true});
   }
 
   getOwner(id: string) {{

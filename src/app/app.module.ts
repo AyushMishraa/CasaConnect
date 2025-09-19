@@ -10,6 +10,7 @@ import { NavbarComponent } from './shared/components/navbar/navbar/navbar.compon
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './pages/dashboard/dashboard/dashboard.component';
 import { PropertyCardComponent } from './shared/components/property-card/property-card/property-card.component';
+import { AuthDialogComponent } from './pages/auth-dialog/auth-dialog/auth-dialog.component';
 @NgModule({
   declarations: [
     AppComponent
@@ -21,6 +22,7 @@ import { PropertyCardComponent } from './shared/components/property-card/propert
     NavbarComponent,
     DashboardComponent,
     PropertyCardComponent,
+    AuthDialogComponent,
     HttpClientModule
   ],
   providers: [

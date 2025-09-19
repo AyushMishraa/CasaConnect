@@ -1,5 +1,5 @@
-<mat-card>
-    <img src="" alt="this is property image">
+<mat-card [@hoverAnim]>
+    <img mat-card-image src="" alt="this is property image">
     <mat-card-content>
         <h3>{{ property.title }}</h3>
         <p>{{ property.description }}</p>
@@ -7,6 +7,10 @@
         <p>{{ property.address }}</p>
     </mat-card-content>
     <mat-card-actions>
-        <button (click)="viewDetails()">View Details</button>
+        <button mat-raised-button color="primary" (click)="viewDetails()">View Details</button>
     </mat-card-actions>
 </mat-card>
+
+<!-- <mat-card [@hoverAnim]>
+    <mat-card-content></mat-card-content>
+</mat-card> -->

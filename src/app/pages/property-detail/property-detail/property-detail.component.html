@@ -1,0 +1,26 @@
+<div class="property-detail" *ngIf="property">
+  <mat-card class="detail-card">
+    <!-- <img mat-card-image [src]="property.imageUrl || 'assets/placeholder.jpg'" alt="Property Image" /> -->
+
+    <mat-card-content>
+      <h1>{{ property.title }}</h1>
+      <p class="location">{{ property.location }}</p>
+      <p class="price">₹ {{ property.price }}</p>
+      <p class="desc">{{ property.description }}</p>
+
+      <div class="owner-info" *ngIf="property.owner">
+        <h3>Owner Details</h3>
+        <p><strong>Name:</strong> {{ property.owner.name }}</p>
+        <p><strong>Email:</strong> {{ property.owner.email }}</p>
+        <p><strong>Phone:</strong> {{ property.owner.phone }}</p>
+        <p><strong>Address:</strong> {{ property.owner.address }}</p>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary">Contact Owner</button>
+      <button mat-stroked-button color="accent" (click)="goBack()">Back to Listings</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
