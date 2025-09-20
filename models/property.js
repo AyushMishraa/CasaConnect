@@ -39,6 +39,7 @@ const propertySchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+  images: [String],
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",

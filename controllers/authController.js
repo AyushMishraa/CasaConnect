@@ -60,7 +60,7 @@ async function loginUser (req, res) {
 
         const token = generateToken(user._id, user.email, user.role);
 
-        // ✅ Send token in cookie
+        //  Send token in cookie
         res.cookie("token", token, {
         httpOnly: true,   // prevents JS access
         secure: process.env.NODE_ENV === "production", // true on HTTPS

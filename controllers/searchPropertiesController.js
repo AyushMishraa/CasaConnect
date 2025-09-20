@@ -1,5 +1,4 @@
 const Property = require("../models/property");
-const { options } = require("../routes/searchPropertiesRoutes");
 
 async function searchProperties (req, res) {
   try {
@@ -17,16 +16,19 @@ async function searchProperties (req, res) {
     } = query;
     
     if (title) {
-       filter.title = title;
+       filter.title = { $regex: title, $options: "i" }; // case-insensitive;
     }
-    if (available) {
-        filter.available = available;
+    if (available !== undefined) {
+        filter.available = available === "true";
     }
     if (bedrooms) {
-        filter.bedrooms = bedrooms;
+        filter.bedrooms = parseInt(bedrooms);
     }
     if (bathrooms) {
-        filter.bathrooms = bathrooms;
+        filter.bathrooms = parseInt(bathrooms);
+    }
+    if (type) {
+        filter.type = type;
     }
     if (minPrice || maxPrice) {
        filter.price = {};
@@ -43,13 +45,13 @@ async function searchProperties (req, res) {
 
     const searchedProperty = await Property.find(filter);
     
-    if (!searchProperties) {
-        res.status(404).json({message: "Searched property not found"});
+    if (!searchedProperty || searchedProperty.length === 0) {
+        return res.status(404).json({message: "Searched property not found"});
     }
     
-    res.status(200).json(searchedProperty);
+    return res.status(200).json(searchedProperty);
   } catch(error) {
-    res.status(500).json({message:"Error fetching searched properties", error: error.message});
+    return res.status(500).json({message:"Error fetching searched properties", error: error.message});
   }
 }
 
