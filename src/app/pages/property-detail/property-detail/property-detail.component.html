@@ -1,26 +1,48 @@
 <div class="property-detail" *ngIf="property">
-  <mat-card class="detail-card">
-    <!-- <img mat-card-image [src]="property.imageUrl || 'assets/placeholder.jpg'" alt="Property Image" /> -->
+  <mat-card class="detail-card animate-card">
+    <img
+      mat-card-image
+      [src]="property.imageUrl || 'assets/images/mumbai-apartment-mumbai-flat-Space-Dynamix.jpg'"
+      alt="Property Image"
+      class="property-img"
+    />
 
     <mat-card-content>
-      <h1>{{ property.title }}</h1>
-      <p class="location">{{ property.location }}</p>
-      <p class="price">₹ {{ property.price }}</p>
-      <p class="desc">{{ property.description }}</p>
+      <h1 class="title">
+        <mat-icon>home</mat-icon> {{ property.title }}
+      </h1>
+
+      <p class="location">
+        <mat-icon>location_on</mat-icon> {{ property.address }}
+      </p>
+
+      <p class="price">
+        <mat-icon>currency_rupee</mat-icon> {{ property.price }}
+      </p>
+
+      <p class="details">
+        <mat-icon>bed</mat-icon> {{ property.bedrooms }} Beds |
+        <mat-icon>bathtub</mat-icon> {{ property.bathrooms }} Baths |
+      </p>
+
+      <p class="desc">
+        <mat-icon>description</mat-icon> {{ property.description }}
+      </p>
+
 
       <div class="owner-info" *ngIf="property.owner">
-        <h3>Owner Details</h3>
-        <p><strong>Name:</strong> {{ property.owner.name }}</p>
-        <p><strong>Email:</strong> {{ property.owner.email }}</p>
-        <p><strong>Phone:</strong> {{ property.owner.phone }}</p>
-        <p><strong>Address:</strong> {{ property.owner.address }}</p>
+        <h3><mat-icon>person</mat-icon> Owner Details</h3>
+        <p><mat-icon>badge</mat-icon> {{ property.owner.name }}</p>
+        <p><mat-icon>email</mat-icon> {{ property.owner.email }}</p>
+        <p><mat-icon>phone</mat-icon> {{ property.owner.phone }}</p>
+        <p><mat-icon>home</mat-icon> {{ property.owner.address }}</p>
       </div>
     </mat-card-content>
 
     <mat-card-actions>
-      <button mat-raised-button color="primary">Contact Owner</button>
-      <button mat-stroked-button color="accent" (click)="goBack()">Back to Listings</button>
+      <button mat-stroked-button color="accent" style="cursor: pointer; width: 100%;" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon> Back to Listings
+      </button>
     </mat-card-actions>
   </mat-card>
 </div>
-

@@ -5,11 +5,12 @@ import { PropertyService } from 'src/app/core/services/property.service';
 import { MatButton } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DecimalPipe } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-property-detail',
   standalone: true,
-  imports: [MatCard, MatCardContent, MatCardActions, MatButton, CommonModule],
+  imports: [MatCard, MatCardContent, MatCardActions, MatButton, CommonModule, MatIcon],
   templateUrl: './property-detail.component.html',
   styleUrl: './property-detail.component.scss',
   providers: [DecimalPipe]

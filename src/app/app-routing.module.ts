@@ -10,7 +10,7 @@ export const routes: Routes = [
   {path: '', component: DashboardComponent},
   {path: 'login', component: AuthDialogComponent},
   {path: 'register', component: AuthDialogComponent},
-  {path: 'property/:id', component: PropertyDetailComponent, canActivate: [A]},
+  {path: 'property/:id', component: PropertyDetailComponent},
   {path: 'property-form', component: PropertyFormComponent},
   {path: 'property-form/:id', component: PropertyFormComponent},
   {path: '**', redirectTo: '/'}

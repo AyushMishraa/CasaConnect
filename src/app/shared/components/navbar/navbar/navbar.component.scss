@@ -1,0 +1,25 @@
+.logo{
+    cursor: pointer;
+ }
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #211951;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0 20px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Roboto', sans-serif;
+    font-size: 38px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    color: #e8e7e7;
+}
+
+  
+ 

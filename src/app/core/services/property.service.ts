@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -14,7 +14,8 @@ export interface propertyInterface {
   address: string,
   city: string,
   available: boolean,
-  owner: any
+  owner: any,
+  imageUrl: string[]
 }
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,24 @@ export class PropertyService {
 
   deleteProperty(id: string) {
     this.http.delete<propertyInterface>(`${this.api$}/properties/removeProperty/${id}`, {withCredentials: true});
+  }
+
+  getSearchedProperties(filters: any = {}): Observable<propertyInterface[]> {
+     let params = new HttpParams();
+    
+    if (filters.city) {
+      params = params.set('city', filters.city);
+    }
+    if (filters.type) {
+      params = params.set('type', filters.type);
+    }
+    if (filters.price) {
+      params = params.set('price', filters.price);
+    }
+    if (filters.available) {
+      params = params.set('available', filters.available);
+    }
+    return this.http.get<propertyInterface[]>(`${this.api$}/property/searchProperty`, { params });
   }
 
   getOwner(id: string) {{

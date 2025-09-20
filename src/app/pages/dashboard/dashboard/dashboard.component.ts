@@ -9,6 +9,7 @@ import { MatFormField } from '@angular/material/form-field';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { PropertyCardComponent } from '../../../shared/components/property-card/property-card/property-card.component';
 import { FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -16,7 +17,7 @@ import { FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
   animations: [
-    trigger('fadeIn', [
+    trigger('slideDown', [
       transition(':enter', [
         style({ opacity: 0, transform: 'translateY(-20px)' }),
         animate('600ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
@@ -30,18 +31,17 @@ export class DashboardComponent {
   // properties: propertyInterface[] = [];
   filteredProperties: propertyInterface[] = [];
 
- constructor(private propertyService: PropertyService, private fb: FormBuilder) {}
+ constructor(private propertyService: PropertyService, private fb: FormBuilder, private snackBar: MatSnackBar) {}
 
  ngOnInit() {
   this.loading = true;
   this.loadProperties();
   this.filterForm = this.fb.group({
-    Location:[],
-    city: [],
-    priceRange: [],
-    type:[],
-    bedrooms: [],
-    bathrooms: [],
+    city: [''],
+    priceRange: [''],
+    type:[''],
+    bedrooms: [''],
+    bathrooms: [''],
     available: [false]
   })
  }
@@ -58,8 +58,28 @@ export class DashboardComponent {
  applyFilters() {
    const filters = this.filterForm.value;
    console.log(filters);
-
+   this.propertyService.getSearchedProperties(filters).subscribe( 
+    { next: (prop) => {
+    if (prop) {
+     this.filteredProperties = prop;
+    }
+   },
+    error: (err) => {
+      if (err.status === 404) {
+       this.snackBar.open(err.error.message, 'Close', { duration: 3000 });
+      }
+   }}); 
  }
 
-  resetFilters() {}
+  resetFilters() {
+    this.filterForm.reset({
+    city: '',
+    priceRange: '',
+    type:'',
+    bedrooms: '',
+    bathrooms: '',
+    available: false
+    });
+    this.loadProperties();
+  }
 }

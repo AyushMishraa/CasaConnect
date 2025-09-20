@@ -1,16 +1,39 @@
-<mat-card [@hoverAnim]>
-    <img mat-card-image src="" alt="this is property image">
-    <mat-card-content>
-        <h3>{{ property.title }}</h3>
-        <p>{{ property.description }}</p>
-        <p>{{ property.price }}</p>
-        <p>{{ property.address }}</p>
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="viewDetails()">View Details</button>
-    </mat-card-actions>
+<mat-card class="property-card">
+  <mat-card-header>
+    <mat-card-title>{{ property.title }}</mat-card-title>
+    <mat-card-subtitle>
+      <mat-icon>location_on</mat-icon> {{ property.city }}
+    </mat-card-subtitle>
+  </mat-card-header>
+
+    <img mat-card-image class="image-container"
+       [src]="property.imageUrl && property.imageUrl.length > 0 ? property.imageUrl[0] : 'assets/images/mumbai-apartment-mumbai-flat-Space-Dynamix.jpg'" 
+       alt="{{ property.title }}" />
+
+  <mat-card-content>
+    <div class="property-info">
+      <div class="info-item">
+        <mat-icon>bed</mat-icon> {{ property.bedrooms }} Beds
+      </div>
+      <div class="info-item">
+        <mat-icon>bathtub</mat-icon> {{ property.bathrooms }} Baths
+      </div>
+      <div class="info-item price">
+        <mat-icon>currency_rupee</mat-icon> {{ property.price | number }}
+      </div>
+    </div>
+
+    <div class="availability" [ngClass]="{ available: property.available, notAvailable: !property.available }">
+      <mat-icon>{{ property.available ? 'check_circle' : 'cancel' }}</mat-icon>
+      {{ property.available ? 'Available' : 'Not Available' }}
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="viewDetails()">
+      <mat-icon>info</mat-icon> View Details
+    </button>
+  </mat-card-actions>
 </mat-card>
 
-<!-- <mat-card [@hoverAnim]>
-    <mat-card-content></mat-card-content>
-</mat-card> -->
+

@@ -1,0 +1,74 @@
+.property-detail {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.detail-card {
+  max-width: 600px;
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.property-img {
+  height: 300px;
+  object-fit: cover;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.location,
+.price,
+.details,
+.description,
+.owner-info p {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 6px 0;
+  font-size: 16px;
+}
+
+.price {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1976d2;
+}
+
+.owner-info {
+  margin-top: 20px;
+  padding: 15px;
+  border-top: 1px solid #eee;
+}
+
+.owner-info h3 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+/* Animation */
+.animate-card {
+  animation: fadeInUp 0.8s ease-in-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

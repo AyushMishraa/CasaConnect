@@ -1,11 +1,11 @@
-<div [@slideDown]>
+<div [@slideDown] class="filter-container">
   <form [formGroup]="filterForm" (ngSubmit)="applyFilters()">
     <!-- Location -->
      <div class="search-bar" >   
       <div class = "filters">
          <mat-form-field appearance="outline" class="search-field">
             <mat-label>Location</mat-label>
-            <input matInput formControlName="Location" placeholder="Enter city or area">
+            <input matInput formControlName="city" placeholder="Enter city or area">
          </mat-form-field>
 
          <!-- Property Type -->
@@ -40,8 +40,8 @@
 </div>
 
 
-<div class="property-grid" [@fadeIn]>
-   <mat-grid-list cols="3" rowHeight="300px">
+<div class="property-grid" [@slideDown]>
+   <mat-grid-list cols="3" rowHeight="600px">
       <mat-grid-tile *ngFor = "let property of filteredProperties">
          <app-property-card [property]="property"></app-property-card>
       </mat-grid-tile>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatCard, MatCardContent, MatCardActions } from '@angular/material/card';
@@ -6,11 +7,12 @@ import { propertyInterface } from '../../../../core/services/property.service';
 import { MatButton } from "@angular/material/button";
 import { trigger, transition, style, animate } from '@angular/animations';
 import { MaterialModule } from 'src/app/shared/material/material.module';
+import { MatCardImage } from '@angular/material/card';
 
 @Component({
   selector: 'app-property-card',
   standalone: true,
-  imports: [MatCard, MatCardContent, MatCardActions, MatButton, MaterialModule],
+  imports: [MatCard, MatCardContent, MatCardActions, MatButton, MaterialModule, CommonModule, MatCardImage],
   templateUrl: './property-card.component.html',
   styleUrl: './property-card.component.scss',
   animations: [
