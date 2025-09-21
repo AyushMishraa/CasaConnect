@@ -53,17 +53,19 @@ async function createProperty(req, res) {
 async function updateProperty(req, res) {
     try {
         const property = await Property.findOneAndUpdate(
-            {_id: req.params.id, owner: req.user._id},
+            {_id: req.params.id, owner: req.user.id},
             req.body,
             { new: true}
         );
+        console.log("req.params.id, req.user._id", req.params.id, req.user._id);
+        console.log("property", property);
         
         if(!property) {
-            res.status(404).json({message: "Property not found", error: error.message});
+            return res.status(404).json({message: "Property not found", error: error.message});
         }
-        res.json(property);
+        return res.json(property);
     } catch (error) {
-        res.status(500).json({message: "Error updating property", error: error.message});
+        return res.status(500).json({message: "Error updating property", error: error.message});
     }
 }
 
