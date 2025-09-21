@@ -7,12 +7,13 @@ import { AuthService } from '../../../../core/services/auth.service'
 import { Router, RouterModule } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { MaterialModule } from 'src/app/shared/material/material.module';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import { AuthDialogComponent } from 'src/app/pages/auth-dialog/auth-dialog/auth-dialog.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [MatToolbar, MatIcon, AsyncPipe, CommonModule, MaterialModule, RouterModule],
+  imports: [MatToolbar, MatIcon, MatTooltipModule,AsyncPipe, CommonModule, MaterialModule, RouterModule],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
@@ -45,5 +46,8 @@ export class NavbarComponent {
       });
     this.router.navigate(['/login'])
   }
-  logout() {}
+  logout() {
+    this.authService.logoutUser();
+    this.router.navigate(['/']);
+  }
 }

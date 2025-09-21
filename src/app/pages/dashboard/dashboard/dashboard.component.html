@@ -41,11 +41,14 @@
 
 
 <div class="property-grid" [@slideDown]>
-   <mat-grid-list cols="3" rowHeight="600px">
+   <mat-grid-list cols="5" rowHeight="600px">
       <mat-grid-tile *ngFor = "let property of filteredProperties">
          <app-property-card [property]="property"></app-property-card>
       </mat-grid-tile>
    </mat-grid-list>
-
-   <mat-spinner *ngIf="loading">Loading Properties</mat-spinner>
+   <!-- <mat-card>
+      <button mat-raised-button color="primary" style="cursor: pointer; width: 100%;">
+         <mat-icon>add</mat-icon> Add Property
+      </button>
+   </mat-card> -->
 </div>

@@ -37,12 +37,12 @@ export class PropertyService {
     return this.http.post<propertyInterface>(`${this.api$}/properties/addProperty`, property, {withCredentials: true});
   }
 
-  updateProperty(property: propertyInterface) {
-   this.http.put<propertyInterface>(`${this.api$}/properties/editProperty/${property._id}`, property, {withCredentials: true});
+  updateProperty(property: propertyInterface): Observable<void> {
+   return this.http.put<void>(`${this.api$}/properties/editProperty/${property._id}`, property, {withCredentials: true});
   }
 
-  deleteProperty(id: string) {
-    this.http.delete<propertyInterface>(`${this.api$}/properties/removeProperty/${id}`, {withCredentials: true});
+  deleteProperty(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.api$}/properties/removeProperty/${id}`, {withCredentials: true});
   }
 
   getSearchedProperties(filters: any = {}): Observable<propertyInterface[]> {

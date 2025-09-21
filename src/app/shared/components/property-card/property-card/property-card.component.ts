@@ -8,11 +8,13 @@ import { MatButton } from "@angular/material/button";
 import { trigger, transition, style, animate } from '@angular/animations';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { MatCardImage } from '@angular/material/card';
+import { MatTooltip } from "@angular/material/tooltip";
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-property-card',
   standalone: true,
-  imports: [MatCard, MatCardContent, MatCardActions, MatButton, MaterialModule, CommonModule, MatCardImage],
+  imports: [MatCard, MatCardContent, MatCardActions, MatButton, MaterialModule, CommonModule, MatCardImage, MatTooltip],
   templateUrl: './property-card.component.html',
   styleUrl: './property-card.component.scss',
   animations: [
@@ -26,9 +28,18 @@ import { MatCardImage } from '@angular/material/card';
 })
 export class PropertyCardComponent {
  @Input() property!: propertyInterface;
- constructor(private router: Router) {}
+ user$ = this.authService.user$;
+ constructor(private router: Router, private authService: AuthService) {}
  
  viewDetails() {
   this.router.navigate(['/property', this.property._id]);
+ }
+
+ addProperty() {
+  this.router.navigate(['/property-form']);
+ }
+
+ editProperty() {
+  this.router.navigate(['/property-form', this.property._id]);
  }
 }

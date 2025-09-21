@@ -5,13 +5,13 @@
 
   <div>
     <ng-container *ngIf="user$ | async as user; else guest">
-      <button mat-button routerLink="/profile">{{ user }}</button>
-      <button mat-icon-button (click)="logout()">
+      <button mat-button style="cursor: pointer; color: white;" routerLink="/profile">{{ user.name }}</button>
+      <button mat-icon-button style="cursor: pointer; color: white;" matTooltip="Logout" (click)="logout()">
         <mat-icon>logout</mat-icon>
       </button>
     </ng-container>
     <ng-template #guest>
-      <button mat-button (click)="openLogin()">Login</button>
+      <button mat-button style="cursor: pointer; color: white;" (click)="openLogin()">Login</button>
       <button mat-raised-button color="accent" (click)="openRegister()">Register</button>
     </ng-template>
   </div>

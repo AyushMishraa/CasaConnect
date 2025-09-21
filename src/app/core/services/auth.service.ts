@@ -19,42 +19,43 @@ export interface UserInterface {
   providedIn: 'root'
 })
 export class AuthService {
-   private api = `${environment.api$}/api/auth`;
+   private api = `${environment.api$}/auth`;
    private userSub = new BehaviorSubject<UserInterface | null>(null);
-   user$ = this.userSub.asObservable();
+   readonly user$ = new Observable<UserInterface | null>;
 
 
   constructor(private http: HttpClient) { 
     const stored = localStorage.getItem('user');
     if (stored) {
       this.userSub.next(JSON.parse(stored));
+      this.user$ = this.userSub.asObservable();
     }
   }
-  registerUser(user: UserInterface): Observable<string> {
-     this.http.post<{user: UserInterface}>(`${this.api}/user/register`, user, {withCredentials: true})
+  
+  registerUser(user: UserInterface): Observable<{user: UserInterface}> {
+     return this.http.post<{user: UserInterface}>(`${this.api}/register`, user)
      .pipe(tap( res => {
-        if (res.user) {
-          this.setUser(res.user);
+        if (res) {
+          this.setUser(res);
         }
       }));
-      return of("User registered successfully");
   }
 
-  loginUser(user: UserInterface): Observable<string> {
-    this.http.post<{user: UserInterface}>(`${this.api}/user/login`, user, {withCredentials: true})
+  loginUser(user: UserInterface): Observable<{user: UserInterface}> {
+    return this.http.post<{user: UserInterface}>(`${this.api}/login`, user, {withCredentials: true})
     .pipe(tap(res => {
       if (res.user) {
         this.setUser(res.user);
       }
     }));
-    return of("User logged in successfully");
   }
 
   logoutUser() {
-
+    localStorage.removeItem('user');
+    this.userSub.next(null);
   }
 
-  setUser(user: UserInterface) {
+  setUser(user: any) {
     localStorage.setItem('user', JSON.stringify(user));
   }
 

@@ -41,6 +41,7 @@ export class AuthDialogComponent {
   registerForm!: FormGroup;
   isLoading = false;
   errorMessage!: string;
+  showLoginForm = false;
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -52,7 +53,8 @@ export class AuthDialogComponent {
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      phone: ['']
+      phone: [''],
+      role: ['tenant', Validators.required]
     })
   }
 
@@ -60,16 +62,18 @@ export class AuthDialogComponent {
     if (this.loginForm.valid) {
       this.isLoading = true;
       this.authService.loginUser(this.loginForm.value).subscribe( {
-        next: (value) => {
-          this.snackBar.open(value, 'Close', {
+        next: (value: any) => {
+          this.snackBar.open('Login successful!', 'Close', {
             duration: 5000
           });
           this.isLoading = false;
-          this.router.navigate(['/']);
-          if (this.authService.isLoggedIn()) {
-           this.isLoading = false; 
-           this.dialogRef.close();
+          if (value._id) {
+           this.router.navigate(['/']);
           }
+          // if (this.authService.isLoggedIn()) {
+          //  this.isLoading = false; 
+          //  this.dialogRef.close();
+          // }
         },
         error: (err) => {
           this.isLoading = false;
@@ -77,28 +81,27 @@ export class AuthDialogComponent {
       })
     }
   }
-
+  
   onRegister() {
-    if (this.registerForm.valid) {
-      this.isLoading = true;
-      this.authService.registerUser(this.registerForm.value).subscribe( {
-        next: (value) => {
-          this.snackBar.open(value, 'Close', {
-            duration: 5000
-          });
-          this.isLoading = false;
-          this.router.navigate(['/login']);
-          if (this.authService.isLoggedIn()) {
-           this.isLoading = false; 
-           this.dialogRef.close();
-          }
-        },
-        error: (err) => {
-          this.isLoading = false;
-        }
-      })
-    }
+  if (this.registerForm.valid) {
+    this.isLoading = true;
+
+    this.authService.registerUser(this.registerForm.value).subscribe({
+      next: (value: any) => {
+        this.snackBar.open('Registration successful!', 'Close', {
+          duration: 5000
+        });
+        this.isLoading = false;
+        this.dialogRef.close();
+        this.showLoginForm = true;
+      },
+      error: (err) => {
+        this.isLoading = false;
+      }
+    });
   }
+}
+ 
 
   updateError() {
     if (this.loginForm.controls['email'].hasError('required')) {
@@ -114,5 +117,9 @@ export class AuthDialogComponent {
     } else if (this.registerForm.controls['email'].hasError('email')) {
       this.errorMessage = 'Email is invalid';
     }
+  }
+
+  onClickSwitch() {
+    this.showLoginForm = true;
   }
 }

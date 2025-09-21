@@ -102,3 +102,19 @@
     padding: 12px 16px 16px;
   }
 }
+
+.edit-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: #1976d2; /* primary blue */
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 2;
+}
+
+.edit-btn:hover {
+  background: #f1f1f1;
+  color: #0d47a1;
+}

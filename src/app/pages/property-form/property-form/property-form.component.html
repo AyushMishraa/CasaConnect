@@ -1,1 +1,66 @@
-<p>property-form works!</p>
+<div class="property-form-container">
+  <mat-card>
+    <h2>{{ isEditMode ? 'Edit Property' : 'Add New Property' }}</h2>
+
+    <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" required placeholder="Enter property title">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" rows="3" placeholder="Enter property description"></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="address" required placeholder="Enter property address">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>City</mat-label>
+        <input matInput formControlName="city" required placeholder="Enter property city">
+      </mat-form-field>
+ 
+      <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Type</mat-label>
+            <mat-select formControlName="type" required>
+            <mat-option value="flat">Flat</mat-option>
+            <mat-option value="room">Room</mat-option>
+            <mat-option value="house">House</mat-option>
+            <mat-option value="apartment">Apartment</mat-option>
+            </mat-select>
+      </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Bedrooms</mat-label>
+            <input matInput type="number" formControlName="bedrooms" required placeholder="Enter number of bedrooms">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Bathrooms</mat-label>
+            <input matInput type="number" formControlName="bathrooms" required placeholder="Enter number of bathrooms">
+        </mat-form-field>
+
+        <mat-slide-toggle style="margin-bottom: 16px;" formControlName="available">Available</mat-slide-toggle>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Price</mat-label>
+        <input matInput type="number" formControlName="price" required placeholder="Enter property price">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Image URL</mat-label>
+        <input matInput formControlName="imageUrl" placeholder="Enter image URL">
+      </mat-form-field>
+
+      <div class="actions">
+        <button mat-raised-button color="primary" type="submit" [disabled]="propertyForm.invalid">
+          {{ isEditMode ? 'Update' : 'Add' }}
+        </button>
+        <button mat-stroked-button color="warn" (click)="onCancel()">Cancel</button>
+      </div>
+    </form>
+  </mat-card>
+</div>

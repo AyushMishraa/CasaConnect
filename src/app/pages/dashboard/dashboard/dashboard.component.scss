@@ -1,35 +1,6 @@
-// .dashboard-container {
-//   padding: 2rem;
-//   text-align: center;
-
-//   .title {
-//     font-size: 2rem;
-//     font-weight: 700;
-//     margin-bottom: 2rem;
-//     color: #3f51b5;
-//     animation: fadeInDown 0.8s ease-in-out;
-//   }
-
-//   .property-grid {
-//     display: grid;
-//     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-//     gap: 1.5rem;
-//   }
-// }
-
-// /* Simple fade-in animation */
-// @keyframes fadeInDown {
-//   from {
-//     opacity: 0;
-//     transform: translateY(-20px);
-//   }
-//   to {
-//     opacity: 1;
-//     transform: translateY(0);
-//   }
-// }
 .search-bar {
   display: flex;
+  position: relative;
   justify-content: space-between;
   align-content: center;
   padding: 10px 10px  ;
@@ -38,6 +9,9 @@
   border-radius: 12px;
   margin-bottom: 20px;
   flex-wrap: wrap;
+  width: 60%;
+  margin-left: 20%;
+  margin-top: 10px;
 }
 
 .filters {

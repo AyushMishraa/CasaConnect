@@ -1,50 +1,68 @@
-<h2 mat-dialog-title>
-  {{ authService.isLoggedIn() ? 'Login' : 'Register' }}
-</h2>
-@if (authService.isLoggedIn()) {
-  <!-- Login Tab -->
-    <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="auth-form">
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" type="email" placeholder="Enter your email" (blur) = updateError()>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Password</mat-label>
-        <input matInput formControlName="password" type="password" placeholder="Enter your password" (blur) = updateError()>
-      </mat-form-field>
-    </form>
-}
-@else {
-  <!-- Register Tab -->
-    <form [formGroup]="registerForm" (ngSubmit)="onRegister()" class="auth-form">
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Name</mat-label>
-        <input matInput formControlName="name" placeholder="Enter your name" (blur) = updateError()>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" type="email" placeholder="Enter your email" (blur) = updateError()>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Password</mat-label>
-        <input matInput formControlName="password" type="password"  placeholder="Enter your password" (blur) = updateError()>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Phone</mat-label>
-        <input matInput formControlName="phone" type="tel" placeholder="Enter your phone">
-      </mat-form-field>
-    </form>
-}
-
-<mat-dialog-actions>
-  <button mat-button >
-    Switch to {{ authService.isLoggedIn() ? 'Register' : 'Login' }}
-  </button>
-  <button mat-raised-button color="primary">
+<mat-card class="auth-card">
+  <h2 mat-dialog-title class="auth-title">
     {{ authService.isLoggedIn() ? 'Login' : 'Register' }}
-  </button>
-</mat-dialog-actions>
+  </h2>
+
+  <!-- Login Form -->
+  <form *ngIf="showLoginForm" [formGroup]="loginForm" (ngSubmit)="onLogin()" class="auth-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email</mat-label>
+      <mat-icon matPrefix>email</mat-icon>
+      <input matInput formControlName="email" type="email" placeholder="Enter your email" (blur)="updateError()">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Password</mat-label>
+      <mat-icon matPrefix>lock</mat-icon>
+      <input matInput formControlName="password" type="password" placeholder="Enter your password" (blur)="updateError()">
+    </mat-form-field>
+  </form>
+
+  <!-- Register Form -->
+  <form *ngIf="!showLoginForm" [formGroup]="registerForm" (ngSubmit)="onRegister()" class="auth-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Name</mat-label>
+      <mat-icon matPrefix>person</mat-icon>
+      <input matInput formControlName="name" placeholder="Enter your name" (blur)="updateError()">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email</mat-label>
+      <mat-icon matPrefix>email</mat-icon>
+      <input matInput formControlName="email" type="email" placeholder="Enter your email" (blur)="updateError()">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Password</mat-label>
+      <mat-icon matPrefix>lock</mat-icon>
+      <input matInput formControlName="password" type="password" placeholder="Enter your password" (blur)="updateError()">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Phone</mat-label>
+      <mat-icon matPrefix>phone</mat-icon>
+      <input matInput formControlName="phone" type="tel" placeholder="Enter your phone">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Role</mat-label>
+            <mat-select formControlName="role">
+            <mat-option value="tenant">Tenant</mat-option>
+            <mat-option value="owner">Owner</mat-option>
+            <mat-option value="admin">Admin</mat-option>
+            </mat-select>
+         </mat-form-field>
+  </form>
+
+  <!-- Dialog Actions -->
+  <mat-dialog-actions class="auth-actions">
+    <button mat-raised-button color="primary" (click)="showLoginForm ? onLogin() : onRegister()" >
+      {{ showLoginForm ? 'Login' : 'Register' }}
+    </button>
+    <button mat-button *ngIf="!showLoginForm" (click)="onClickSwitch()">
+      Switch to Login
+    </button>
+  </mat-dialog-actions>
+</mat-card>
+
+<mat-spinner *ngIf="isLoading"></mat-spinner>

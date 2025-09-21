@@ -1,4 +1,7 @@
 <mat-card class="property-card">
+  <button *ngIf="(user$ | async)?.role === 'admin' || (user$ | async)?.role === 'owner'" mat-icon-button matTooltip="Edit" class="edit-btn" (click)="editProperty()">
+    <mat-icon>edit</mat-icon>
+  </button>
   <mat-card-header>
     <mat-card-title>{{ property.title }}</mat-card-title>
     <mat-card-subtitle>
@@ -30,8 +33,11 @@
   </mat-card-content>
 
   <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="viewDetails()">
+    <button mat-raised-button color="primary" style="cursor: pointer; width: 100%;" (click)="viewDetails()">
       <mat-icon>info</mat-icon> View Details
+    </button>
+    <button mat-raised-button color="primary" style="cursor: pointer; width: 100%;" (click)="addProperty()">
+      <mat-icon>add</mat-icon> Add Property
     </button>
   </mat-card-actions>
 </mat-card>

@@ -4,20 +4,20 @@ import { DashboardComponent } from './pages/dashboard/dashboard/dashboard.compon
 import { AuthDialogComponent } from './pages/auth-dialog/auth-dialog/auth-dialog.component';
 import { PropertyDetailComponent } from './pages/property-detail/property-detail/property-detail.component';
 import { PropertyFormComponent } from './pages/property-form/property-form/property-form.component';
-import { AuthGuard as A } from './core/guards/auth.guard';
+import { AuthGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {path: '', component: DashboardComponent},
   {path: 'login', component: AuthDialogComponent},
   {path: 'register', component: AuthDialogComponent},
-  {path: 'property/:id', component: PropertyDetailComponent},
-  {path: 'property-form', component: PropertyFormComponent},
-  {path: 'property-form/:id', component: PropertyFormComponent},
-  {path: '**', redirectTo: '/'}
+  {path: 'property/:id', component: PropertyDetailComponent, canActivate: [AuthGuard]},
+  {path: 'property-form', component: PropertyFormComponent, canActivate: [AuthGuard]},
+  {path: 'property-form/:id', component: PropertyFormComponent, canActivate: [AuthGuard]},
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
