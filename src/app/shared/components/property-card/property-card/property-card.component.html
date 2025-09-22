@@ -1,11 +1,20 @@
 <mat-card class="property-card">
-  <button *ngIf="(user$ | async)?.role === 'admin' || (user$ | async)?.role === 'owner'" mat-icon-button matTooltip="Edit" class="edit-btn" (click)="editProperty()">
-    <mat-icon>edit</mat-icon>
-  </button>
+  @if ((user$ | async)?.role === 'admin' || (user$ | async)?.role === 'owner') {
+    <div class ="action-buttons">
+      <button  mat-icon-button matTooltip="Edit" class="action-btn" (click)="editProperty()">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Delete" class="action-btn" (click)="deleteProperty()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+ }
   <mat-card-header>
     <mat-card-title>{{ property.title }}</mat-card-title>
     <mat-card-subtitle>
-      <mat-icon>location_on</mat-icon> {{ property.city }}
+      <div class="location">
+       <mat-icon>location_on</mat-icon> {{ property.city }}
+      </div>
     </mat-card-subtitle>
   </mat-card-header>
 
@@ -33,11 +42,8 @@
   </mat-card-content>
 
   <mat-card-actions>
-    <button mat-raised-button color="primary" style="cursor: pointer; width: 100%;" (click)="viewDetails()">
+    <button *ngIf="(user$ | async)?.role === 'admin' || (user$ | async)?.role === 'owner'" mat-raised-button color="primary" style="cursor: pointer; width: 100%;" (click)="viewDetails()">
       <mat-icon>info</mat-icon> View Details
-    </button>
-    <button mat-raised-button color="primary" style="cursor: pointer; width: 100%;" (click)="addProperty()">
-      <mat-icon>add</mat-icon> Add Property
     </button>
   </mat-card-actions>
 </mat-card>

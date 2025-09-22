@@ -54,8 +54,11 @@ export class PropertyService {
     if (filters.type) {
       params = params.set('type', filters.type);
     }
-    if (filters.price) {
-      params = params.set('price', filters.price);
+    if (filters.maxPrice) {
+      params = params.set('maxPrice', filters.maxPrice);
+    }
+    if (filters.minPrice) {
+      params = params.set('minPrice', filters.minPrice);
     }
     if (filters.available) {
       params = params.set('available', filters.available);

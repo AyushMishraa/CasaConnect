@@ -1,15 +1,24 @@
 <mat-toolbar color="secondary" class="navbar">
   <div>
+    <mat-icon class="home-icon" (click)="onClickDashboard()">place</mat-icon>
    <span class="logo" (click)="onClickDashboard()">CasaConnect</span>
   </div>
 
   <div>
-    <ng-container *ngIf="user$ | async as user; else guest">
-      <button mat-button style="cursor: pointer; color: white;" routerLink="/profile">{{ user.name }}</button>
-      <button mat-icon-button style="cursor: pointer; color: white;" matTooltip="Logout" (click)="logout()">
-        <mat-icon>logout</mat-icon>
+     <button *ngIf="user$ | async as user; else guest" mat-button style="cursor: pointer; color: white; size: 100px;" [matMenuTriggerFor]="userMenu">
+      <mat-icon>account_circle</mat-icon>
+      {{ (user$ | async)?.name || 'Guest' }}
+    </button>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item (click)="goToProfile()">
+        <mat-icon>person</mat-icon>
+        Profile
       </button>
-    </ng-container>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        Logout
+      </button>
+    </mat-menu>
     <ng-template #guest>
       <button mat-button style="cursor: pointer; color: white;" (click)="openLogin()">Login</button>
       <button mat-raised-button color="accent" (click)="openRegister()">Register</button>

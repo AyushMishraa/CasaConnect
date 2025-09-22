@@ -33,7 +33,7 @@ export class NavbarComponent {
       width: '800px',
       height: '800px',
       disableClose: true,
-      data: { tab: 'login' }   // optional: pass which tab to show
+      data: { tab: 'register' }   // optional: pass which tab to show
       });
     this.router.navigate(['/register']);
   }
@@ -46,6 +46,9 @@ export class NavbarComponent {
       });
     this.router.navigate(['/login'])
   }
+ 
+  goToProfile() {}
+
   logout() {
     this.authService.logoutUser();
     this.router.navigate(['/']);

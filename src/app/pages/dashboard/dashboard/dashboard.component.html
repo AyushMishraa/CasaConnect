@@ -1,5 +1,6 @@
 <div [@slideDown] class="filter-container">
-  <form [formGroup]="filterForm" (ngSubmit)="applyFilters()">
+  <form [formGroup]="filterForm" (ngSubmit)="applyFilters()" class="filter-form">
+     <h2 class="filter-title">Unlock Your Next Home with Ease</h2>
     <!-- Location -->
      <div class="search-bar" >   
       <div class = "filters">
@@ -20,10 +21,16 @@
             </mat-select>
          </mat-form-field>
 
+         <!-- Min Price -->
+         <mat-form-field appearance="outline" class="search-field">
+            <mat-label>Min Price</mat-label>
+            <input matInput type="number" formControlName="minPrice" placeholder="Enter min price">
+         </mat-form-field>
+
          <!-- Max Price -->
          <mat-form-field appearance="outline" class="search-field">
             <mat-label>Max Price</mat-label>
-            <input matInput type="number" formControlName="priceRange" placeholder="Enter price">
+            <input matInput type="number" formControlName="maxPrice" placeholder="Enter max price">
          </mat-form-field>
 
          <!-- Availability -->
@@ -46,9 +53,35 @@
          <app-property-card [property]="property"></app-property-card>
       </mat-grid-tile>
    </mat-grid-list>
-   <!-- <mat-card>
-      <button mat-raised-button color="primary" style="cursor: pointer; width: 100%;">
-         <mat-icon>add</mat-icon> Add Property
-      </button>
-   </mat-card> -->
+  <button *ngIf="(user$ | async)?.role === 'admin' || (user$ | async)?.role === 'owner'" mat-fab color="accent" class="add-property-btn" (click)="addProperty()" [@popIn]>
+  <mat-icon>add</mat-icon>
+</button>
 </div>
+
+
+<footer class="dashboard-footer" [@fadeIn]>
+  <div class="footer-container">
+    <div class="footer-left">
+      <h3>CasaConnect</h3>
+      <p>Find your perfect property with ease.</p>
+    </div>
+
+    <div class="footer-links">
+      <a href="#">Home</a>
+      <!-- <a routerLink="/property-form">Add Property</a>
+      <a routerLink="/login">Login</a>
+      <a routerLink="/register">Register</a> -->
+    </div>
+
+    <div class="footer-social">
+      <a href="#" aria-label="Facebook"><mat-icon>facebook</mat-icon></a>
+      <a href="#" aria-label="Twitter"><mat-icon>twitter</mat-icon></a>
+      <a href="#" aria-label="Instagram"><mat-icon>instagram</mat-icon></a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    &copy; 2025 CasaConnect. All rights reserved.
+  </div>
+</footer>
+

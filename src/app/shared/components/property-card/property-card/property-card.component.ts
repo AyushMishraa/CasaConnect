@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatCard, MatCardContent, MatCardActions } from '@angular/material/card';
-import { propertyInterface } from '../../../../core/services/property.service';
+import { propertyInterface, PropertyService } from '../../../../core/services/property.service';
 import { MatButton } from "@angular/material/button";
 import { trigger, transition, style, animate } from '@angular/animations';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { MatCardImage } from '@angular/material/card';
 import { MatTooltip } from "@angular/material/tooltip";
 import { AuthService } from 'src/app/core/services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-property-card',
@@ -29,17 +30,34 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class PropertyCardComponent {
  @Input() property!: propertyInterface;
  user$ = this.authService.user$;
- constructor(private router: Router, private authService: AuthService) {}
+ constructor(
+    private router: Router, 
+    private authService: AuthService, 
+    private propertyService: PropertyService,
+    private snackBar: MatSnackBar
+  ) {}
  
  viewDetails() {
   this.router.navigate(['/property', this.property._id]);
  }
 
- addProperty() {
-  this.router.navigate(['/property-form']);
- }
-
  editProperty() {
   this.router.navigate(['/property-form', this.property._id]);
  }
+
+  deleteProperty() {
+    if (confirm('Are you sure you want to delete this property?')) {
+      this.propertyService.deleteProperty(this.property._id).subscribe({
+        next: () => {
+          window.location.reload();
+        },
+        error: (err) => {
+          console.error('Error deleting property:', err);
+          this.snackBar.open('Failed to delete property. Please try again later.', 'Close', {
+            duration: 3000,
+          });
+        }
+      });
+   }
+  }
 }

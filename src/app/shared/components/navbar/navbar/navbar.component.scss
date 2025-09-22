@@ -6,7 +6,7 @@
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: #211951;
+    background-color: #687FE5;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 0 20px;
     height: 64px;
@@ -20,6 +20,26 @@
     letter-spacing: 0.02em;
     color: #e8e7e7;
 }
+
+.home-icon {
+  font-size: 40px;          /* Controls icon size */
+  line-height: 1.8;           /* Prevents vertical trimming */
+  display: inline-flex;     /* Ensures proper alignment */
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  margin-right: 10px;
+  cursor: pointer;
+  color: #e8e7e7;
+  transition: color 0.3s ease;
+  margin-top: -8px;
+  padding: 8px;
+}
+
+.home-icon:hover {
+  color: #ff9800;           /* Highlight on hover */
+}
+
 
   
  

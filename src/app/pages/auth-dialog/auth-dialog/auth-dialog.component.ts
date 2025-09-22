@@ -100,7 +100,7 @@ export class AuthDialogComponent {
       }
     });
   }
-}
+ }
  
 
   updateError() {

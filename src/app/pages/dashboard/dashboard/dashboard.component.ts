@@ -10,6 +10,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { PropertyCardComponent } from '../../../shared/components/property-card/property-card/property-card.component';
 import { FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -30,15 +32,23 @@ export class DashboardComponent {
   filterForm!: FormGroup
   // properties: propertyInterface[] = [];
   filteredProperties: propertyInterface[] = [];
+  user$ = this.authService.user$;
 
- constructor(private propertyService: PropertyService, private fb: FormBuilder, private snackBar: MatSnackBar) {}
+ constructor(
+  private authService: AuthService,
+  private propertyService: PropertyService, 
+  private fb: FormBuilder,
+  private snackBar: MatSnackBar,
+  private router: Router
+) {}
 
  ngOnInit() {
   this.loading = true;
   this.loadProperties();
   this.filterForm = this.fb.group({
     city: [''],
-    priceRange: [''],
+    minPrice: [''],
+    maxPrice: [''],
     type:[''],
     bedrooms: [''],
     bathrooms: [''],
@@ -74,7 +84,8 @@ export class DashboardComponent {
   resetFilters() {
     this.filterForm.reset({
     city: '',
-    priceRange: '',
+    minPrice: '',
+    maxPrice: '',
     type:'',
     bedrooms: '',
     bathrooms: '',
@@ -82,4 +93,8 @@ export class DashboardComponent {
     });
     this.loadProperties();
   }
+  
+   addProperty() {
+  this.router.navigate(['/property-form']);
+ }
 }

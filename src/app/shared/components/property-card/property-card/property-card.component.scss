@@ -3,7 +3,7 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     overflow: hidden;
-    background-color: #15F5BA;
+    background-color: #e7d8f2;
     height: 100%;
     width: 100%;
     display: flex;
@@ -55,6 +55,12 @@
       color: #333;
     }
 
+    .location {
+      mat-icon {
+        color: #d32f2f;
+      }
+    }
+
     .address,
     .price,
     .availability {
@@ -103,8 +109,7 @@
   }
 }
 
-.edit-btn {
-  position: absolute;
+.action-btn {
   top: 8px;
   right: 8px;
   color: #1976d2; /* primary blue */
@@ -114,7 +119,19 @@
   z-index: 2;
 }
 
-.edit-btn:hover {
+.action-btn:hover {
   background: #f1f1f1;
   color: #0d47a1;
+}
+
+.action-buttons {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 6px;
+}
+
+.property-card {
+  position: relative; /* Needed so buttons stay inside card */
 }
